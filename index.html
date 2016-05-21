@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Game exp</title>
+</head>
+<body>
+  <canvas id="farm" width="500" height="500" style="background-color:#fff;"></canvas>
+
+  <script>
+    var canvas = document.getElementById('farm');
+    var context = canvas.getContext('2d');
+    var countDownFrom = 120;
+
+    function Background() {
+
+    }
+
+    function Timer(text) {
+      context.save();
+      context.font = '48px Arial';
+      context.fillText(text, 100, 100);
+      context.restore();
+    }
+
+    var time = setInterval(function() {
+      countDownFrom -= 1
+    }, 1000);
+
+    (function play() {
+      window.requestAnimationFrame(play, canvas);
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      Timer(countDownFrom);
+
+      if (countDownFrom < 1) {
+        clearInterval(time);
+      }
+    })();
+  </script>
+</body>
+</html>
