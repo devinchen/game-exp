@@ -14,19 +14,18 @@
     var countDownFrom = 120;
     var timer = Timer.getInstance();
 
-    var countdown = setInterval(function() {
-      countDownFrom -= 1
-    }, 1000);
+    // start countdown
+    timer.time = countDownFrom;
+    timer.start();
 
     (function play() {
       window.requestAnimationFrame(play, canvas);
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      timer.time = countDownFrom;
       timer.draw(context);
 
-      if (countDownFrom < 1) {
-        clearInterval(countdown);
+      if (timer.time < 1) {
+        timer.stop();
       }
     })();
   </script>
