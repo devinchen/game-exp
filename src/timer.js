@@ -8,18 +8,24 @@ var Timer = (function() {
       font: '20px Arial',
       fontColor: 'blue',
       time: 0,
+      isStop: false,
 
       start: function() {
+        if (this.isStop) {
+          return;
+        }
+
         countdown = setInterval(function() {
           this.time -= 1;
 
           if (this.time === 0) {
-            clearInterval(countdown);
+            this.stop();
           }
         }.bind(this), 1000);
       },
 
-      pause: function() {
+      stop: function() {
+        this.isStop = true;
         clearInterval(countdown);
       },
 
