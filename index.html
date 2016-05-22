@@ -8,21 +8,27 @@
   <canvas id="farm" width="500" height="500" style="background-color:#fff;"></canvas>
   <script src="src/timer.js"></script>
   <script src="src/animal.js"></script>
+  <script src="src/textures.js"></script>
+  <script src="src/helpers.js"></script>
   <script>
     var canvas = document.getElementById('farm');
     var context = canvas.getContext('2d');
-    var countDownFrom = 10;
+    var maxAnimals = 12;
+    var countDownFrom = 120;
     var timer = Timer.getInstance();
+    var textures = getTextures();
     var animals = [];
 
-    // start countdown
     timer.time = countDownFrom;
     timer.start();
 
-    // generate animals
-    for (var i = 0; i < 11; i++) {
+    for (var i = 0; i < maxAnimals - 1; i++) {
+      var randomPosition = getRandomPosition(context);
+
       animals[i] = new Animal();
-      animals[i].label = i;
+      animals[i].setTexture(textures[i]);
+      animals[i].x = randomPosition.x;
+      animals[i].y = randomPosition.y;
     }
 
     (function play() {
