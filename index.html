@@ -6,27 +6,38 @@
 </head>
 <body>
   <canvas id="farm" width="500" height="500" style="background-color:#fff;"></canvas>
-
   <script src="src/timer.js"></script>
+  <script src="src/animal.js"></script>
   <script>
     var canvas = document.getElementById('farm');
     var context = canvas.getContext('2d');
-    var countDownFrom = 120;
+    var countDownFrom = 10;
     var timer = Timer.getInstance();
+    var animals = [];
 
     // start countdown
     timer.time = countDownFrom;
     timer.start();
 
+    // generate animals
+    for (var i = 0; i < 11; i++) {
+      animals[i] = new Animal();
+      animals[i].label = i;
+    }
+
     (function play() {
       window.requestAnimationFrame(play, canvas);
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      timer.draw(context);
+      animals.forEach(function(animal) {
+        if (timer.isStop) {
+          animal.stop();
+        }
 
-      if (timer.time < 1) {
-        timer.stop();
-      }
+        animal.draw(context);
+      });
+
+      timer.draw(context);
     })();
   </script>
 </body>
