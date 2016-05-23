@@ -1,10 +1,24 @@
 function Animal() {
   this.x = 0;
   this.y = 0;
+  this.scale = 0;
   this.texture = '';
-  this.speed = Math.random() * 10;
+  this.speed = Math.random() * 1;
   this.isStop = false;
+  this.isShow = false;
 }
+
+Animal.prototype.show = function() {
+  if (this.isShow) {
+    return;
+  }
+
+  if (this.scale < 1) {
+    this.scale += 0.1;
+  } else {
+    this.isShow = true;
+  }
+};
 
 Animal.prototype.move = function() {
   if (this.isStop) {
@@ -30,13 +44,10 @@ Animal.prototype.draw = function(context) {
     this.speed *= -1;
   }
 
-  this.move();
-
   context.save();
   context.translate(this.x, this.y);
-  context.fillStyle = 'gray';
-  context.scale(0.5, 0.5);
-  context.drawImage(this.texture, 0, 0);
+  context.scale(this.scale, this.scale);
+  context.drawImage(this.texture, 0, 0, 60, 60);
   context.restore();
 };
 
@@ -47,7 +58,7 @@ Animal.prototype.isOutsideBoundary = function(context) {
   return (
     this.x < 0 ||
     this.y < 0 ||
-    this.x > width ||
-    this.y > height
+    this.x > width - 60 ||
+    this.y > height - 60
   );
 };
