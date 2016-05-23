@@ -1,9 +1,11 @@
 function Animal() {
   this.x = 0;
   this.y = 0;
+  this.vx = Math.random() * 2;
+  this.vy = Math.random() * 2;
   this.scale = 0;
   this.texture = '';
-  this.speed = Math.random() * 1;
+  this.textureSize = 40;
   this.isStop = false;
   this.isShow = false;
 }
@@ -21,12 +23,22 @@ Animal.prototype.show = function() {
 };
 
 Animal.prototype.move = function() {
+  var width = context.canvas.width;
+  var height = context.canvas.height;
+
   if (this.isStop) {
     return;
   }
 
-  this.x += this.speed;
-  this.y += this.speed;
+  if (this.y > height - 60 || this.y < 15) {
+    this.vy *= -1;
+  }
+  if (this.x > width - 60 || this.x < 15) {
+    this.vx *= -1;
+  }
+
+  this.x += this.vx;
+  this.y += this.vy;
 };
 
 Animal.prototype.stop = function() {
@@ -40,25 +52,9 @@ Animal.prototype.setTexture = function(texture) {
 };
 
 Animal.prototype.draw = function(context) {
-  if (this.isOutsideBoundary(context)) {
-    this.speed *= -1;
-  }
-
   context.save();
   context.translate(this.x, this.y);
   context.scale(this.scale, this.scale);
-  context.drawImage(this.texture, 0, 0, 60, 60);
+  context.drawImage(this.texture, 0, 0, this.textureSize, this.textureSize);
   context.restore();
-};
-
-Animal.prototype.isOutsideBoundary = function(context) {
-  var width = context.canvas.width;
-  var height = context.canvas.height;
-
-  return (
-    this.x < 0 ||
-    this.y < 0 ||
-    this.x > width - 60 ||
-    this.y > height - 60
-  );
 };
