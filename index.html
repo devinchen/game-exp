@@ -3,9 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Game exp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #689F38;
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      height: 100vh;
+    }
+    #farm {
+      box-shadow: inset 0 0 0 15px #326E2B;
+      background-color: #8BC34A;
+      max-width: 80vw;
+      margin: auto;
+    }
+  </style>
 </head>
 <body>
-  <canvas id="farm" width="500" height="500" style="background-color:#fff;"></canvas>
+  <div class="container">
+    <canvas id="farm" width="400" height="300"></canvas>
+  </div>
   <script src="src/timer.js"></script>
   <script src="src/animal.js"></script>
   <script src="src/textures.js"></script>
@@ -14,32 +35,49 @@
     var canvas = document.getElementById('farm');
     var context = canvas.getContext('2d');
     var maxAnimals = 12;
-    var countDownFrom = 120;
+    var countDownFrom = 12;
     var timer = Timer.getInstance();
     var textures = getTextures();
     var animals = [];
+    var index = 0;
+    var observer;
+
+    function isCheckPoint() {
+      return timer.time % (countDownFrom / maxAnimals) === 0;
+    }
+
+    function generateAnimal(index) {
+      var randomPosition = getRandomPosition(context);
+      var animal = new Animal();
+
+      animal.setTexture(textures[index]);
+      animal.x = randomPosition.x;
+      animal.y = randomPosition.y;
+
+      return animal;
+    }
+
+    observer = setInterval(function() {
+      if (isCheckPoint() && index < maxAnimals) {
+        animals.push(generateAnimal(index));
+        index++;
+      }
+
+      if (timer.isStop) {
+        clearInterval(observer);
+      }
+    }, 1000)
 
     timer.time = countDownFrom;
     timer.start();
-
-    for (var i = 0; i < maxAnimals - 1; i++) {
-      var randomPosition = getRandomPosition(context);
-
-      animals[i] = new Animal();
-      animals[i].setTexture(textures[i]);
-      animals[i].x = randomPosition.x;
-      animals[i].y = randomPosition.y;
-    }
 
     (function play() {
       window.requestAnimationFrame(play, canvas);
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      animals.forEach(function(animal) {
-        if (timer.isStop) {
-          animal.stop();
-        }
-
+      animals.forEach(function(animal, index) {
+        animal.show();
+        animal.move();
         animal.draw(context);
       });
 
