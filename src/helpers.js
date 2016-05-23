@@ -3,7 +3,7 @@ function getRandomPosition(context) {
   var maxHeight = context.canvas.height;
 
   return {
-    x: Math.round(maxWidth * Math.random()),
-    y: Math.round(maxHeight * Math.random()),
+    x: Math.round((maxWidth - 60) * Math.random()),
+    y: Math.round((maxHeight - 60) * Math.random()),
   };
 }
