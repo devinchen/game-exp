@@ -5,8 +5,7 @@ var Timer = (function() {
     var countdown;
 
     return {
-      font: '20px Arial',
-      fontColor: 'blue',
+      font: '30px monospace',
       time: 0,
       isStop: false,
 
@@ -36,7 +35,7 @@ var Timer = (function() {
       draw: function(context) {
         context.save();
         context.font = this.font;
-        context.fillText(this.time, 100, 100);
+        context.fillText(this.time, 30, 50);
         context.restore();
       },
     };
