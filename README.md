@@ -3,7 +3,3 @@
 ### Prepare
 
 `npm install`
-
-### Test
-
-`npm test`
