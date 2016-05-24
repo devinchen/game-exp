@@ -30,6 +30,7 @@
   <script src="src/timer.js"></script>
   <script src="src/animal.js"></script>
   <script src="src/textures.js"></script>
+  <script src="src/mouse-events.js"></script>
   <script src="src/helpers.js"></script>
   <script>
     var canvas = document.getElementById('farm');
@@ -46,11 +47,11 @@
       return timer.time % (countDownFrom / maxAnimals) === 0;
     }
 
-    function generateAnimal(index) {
+    function generateAnimal(textureIndex) {
       var randomPosition = getRandomPosition(context);
       var animal = new Animal();
 
-      animal.setTexture(textures[index]);
+      animal.setTexture(textures[textureIndex]);
       animal.x = randomPosition.x;
       animal.y = randomPosition.y;
 
@@ -70,6 +71,10 @@
 
     timer.time = countDownFrom;
     timer.start();
+
+    canvas.addEventListener('mousedown', onMouseDown);
+    canvas.addEventListener('mouseup', onMouseLeave);
+    canvas.addEventListener('mouseout', onMouseLeave);
 
     (function play() {
       window.requestAnimationFrame(play, canvas);

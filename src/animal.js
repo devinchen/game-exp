@@ -45,6 +45,10 @@ Animal.prototype.stop = function() {
   this.isStop = true;
 };
 
+Animal.prototype.resume = function() {
+  this.isStop = false;
+};
+
 Animal.prototype.setTexture = function(texture) {
   var image = new Image();
   image.src = texture;
@@ -57,4 +61,11 @@ Animal.prototype.draw = function(context) {
   context.scale(this.scale, this.scale);
   context.drawImage(this.texture, 0, 0, this.textureSize, this.textureSize);
   context.restore();
+};
+
+Animal.prototype.isOnHit = function(mx, my) {
+  return mx > this.x &&
+    mx < this.x + this.textureSize &&
+    my > this.y &&
+    my < this.y + this.textureSize;
 };
