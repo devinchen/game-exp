@@ -47,11 +47,11 @@
       return timer.time % (countDownFrom / maxAnimals) === 0;
     }
 
-    function generateAnimal(index) {
+    function generateAnimal(textureIndex) {
       var randomPosition = getRandomPosition(context);
       var animal = new Animal();
 
-      animal.setTexture(textures[index]);
+      animal.setTexture(textures[textureIndex]);
       animal.x = randomPosition.x;
       animal.y = randomPosition.y;
 
