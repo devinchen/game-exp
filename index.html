@@ -30,7 +30,7 @@
   <script src="src/timer.js"></script>
   <script src="src/animal.js"></script>
   <script src="src/textures.js"></script>
-  <script src="src/mouse-events.js"></script>
+  <script src="src/touch-events.js"></script>
   <script src="src/helpers.js"></script>
   <script>
     var canvas = document.getElementById('farm');
@@ -72,9 +72,8 @@
     timer.time = countDownFrom;
     timer.start();
 
-    canvas.addEventListener('mousedown', onMouseDown);
-    canvas.addEventListener('mouseup', onMouseLeave);
-    canvas.addEventListener('mouseout', onMouseLeave);
+    canvas.addEventListener('touchstart', onTouchStart);
+    canvas.addEventListener('touchend', onTouchEnd);
 
     (function play() {
       window.requestAnimationFrame(play, canvas);
