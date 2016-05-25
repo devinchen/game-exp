@@ -25,13 +25,36 @@ function onTouchStart(event) {
 
 function onTouchMove(event) {
   var animal = animals[targetAnimalIndex];
-  var touchLeft = event.targetTouches[0].pageX - event.target.offsetLeft;
-  var touchTop = event.targetTouches[0].pageY - event.target.offsetTop;
-
-  animal.x = touchLeft - offsetPosition.x;
-  animal.y = touchTop - offsetPosition.y;
+  var canvas = event.target;
+  var canvasWidth = canvas.clientWidth;
+  var canvasHeight = canvas.clientHeight;
+  var canvasLeft = canvas.offsetLeft;
+  var canvasRight = canvas.offsetLeft + canvas.width;
+  var canvasTop = canvas.offsetTop;
+  var canvasBottom = canvas.offsetTop + canvas.height;
+  var touchLeft = event.targetTouches[0].pageX;
+  var touchTop = event.targetTouches[0].pageY;
 
   animal.stop();
+
+  animal.x = touchLeft - canvasLeft - offsetPosition.x;
+  animal.y = touchTop - canvasTop - offsetPosition.y;
+
+  if (touchLeft > canvasRight - animalSize + offsetPosition.x) {
+    animal.x = canvasWidth - animalSize;
+  }
+
+  if (touchLeft < canvasLeft + offsetPosition.x) {
+    animal.x = 0;
+  }
+
+  if (touchTop > canvasBottom - animalSize + offsetPosition.y) {
+    animal.y = canvasHeight - animalSize;
+  }
+
+  if (touchTop < canvasTop + offsetPosition.y) {
+    animal.y = 0;
+  }
 }
 
 function onTouchEnd(event) {
