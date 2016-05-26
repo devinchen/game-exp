@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "karma start"
+    "build": "gulp compress"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/devinchen/game-exp#readme",
   "devDependencies": {
-    "uglify": "^0.1.5"
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglifyjs": "^0.6.2"
   },
   "dependencies": {}
 }
