@@ -35,6 +35,7 @@ function onTouchMove(event) {
   var touchLeft = event.targetTouches[0].pageX;
   var touchTop = event.targetTouches[0].pageY;
 
+  event.preventDefault();
   animal.stop();
 
   animal.x = touchLeft - canvasLeft - offsetPosition.x;
