@@ -2,9 +2,7 @@ function onRotate(event) {
   var farmSize;
 
   farm.setSize();
-
-  farmSize = farm.getSize();
-  animalSize = farmSize.width / 12;
+  animalSize = calcAnimalSize(farm);
 
   animals.forEach(function(animal) {
     animal.setPosition();

@@ -6,16 +6,12 @@ var countDownFrom = 12;
 var timer = Timer.getInstance();
 var textures = getTextures();
 var animals = [];
-var animalSize = 40;
+var animalSize = calcAnimalSize(farm);
 var index = 0;
 var observer;
 
-function isCheckPoint() {
-  return timer.time % (countDownFrom / maxAnimals) === 0;
-}
-
 function generateAnimal(textureIndex) {
-  var randomPosition = getRandomPosition(farm.context);
+  var randomPosition = getRandomPosition(farm);
   var animal = new Animal();
 
   animal.setTexture(textures[textureIndex]);
