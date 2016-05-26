@@ -3,9 +3,11 @@ var uglify = require('gulp-uglifyjs');
 var concat = require('gulp-concat');
 var sourceFiles = [
   'src/timer.js',
+  'src/farm.js',
   'src/animal.js',
   'src/textures.js',
   'src/touch-events.js',
+  'src/device-events.js',
   'src/helpers.js',
   'src/index.js'
 ];
