@@ -20,7 +20,7 @@ function getRandomPosition(context) {
 
 function getScreenSize() {
   return {
-    width: screen.width || window.innerWidth,
-    height: screen.height || window.innerHeight
+    width: screen.width,
+    height: screen.height
   };
 }
