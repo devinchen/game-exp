@@ -54,6 +54,14 @@ Animal.prototype.setTexture = function(texture) {
   this.texture = image;
 };
 
+Animal.prototype.setPosition = function() {
+
+};
+
+Animal.prototype.setSize = function (size) {
+  this.textureSize = size;
+};
+
 Animal.prototype.draw = function(context) {
   context.save();
   context.translate(this.x, this.y);
