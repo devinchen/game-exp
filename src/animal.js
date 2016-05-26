@@ -15,7 +15,7 @@ Animal.prototype.show = function() {
     return;
   }
 
-  if (this.scale < 1) {
+  if (this.scale <= 1) {
     this.scale += 0.1;
   } else {
     this.isShow = true;
@@ -54,8 +54,11 @@ Animal.prototype.setTexture = function(texture) {
   this.texture = image;
 };
 
-Animal.prototype.setPosition = function() {
-
+Animal.prototype.setPositionByRatio = function(ratio) {
+  if (ratio) {
+    this.x *= ratio;
+    this.y *= ratio;
+  }
 };
 
 Animal.prototype.setSize = function (size) {

@@ -1,11 +1,16 @@
 function onRotate(event) {
-  var farmSize;
+  var oldFarmSize = farm.getSize();
+  var newFarmSize;
+  var farmScale;
 
   farm.setSize();
+  newFarmSize = farm.getSize();
   animalSize = calcAnimalSize(farm);
 
+  farmScale = newFarmSize.width / oldFarmSize.width;
+
   animals.forEach(function(animal) {
-    animal.setPosition();
+    animal.setPositionByRatio(farmScale);
     animal.setSize(animalSize);
   });
 }
