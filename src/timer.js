@@ -35,7 +35,7 @@ var Timer = (function() {
       draw: function(context) {
         context.save();
         context.font = this.font;
-        context.fillText(this.time, 30, 50);
+        context.fillText(this.time, 10, 40);
         context.restore();
       },
     };

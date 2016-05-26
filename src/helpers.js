@@ -3,19 +3,13 @@ function getRandomPosition(context) {
   var maxHeight = context.canvas.height;
   var randomX = Math.round(maxWidth * Math.random());
   var randomY = Math.round(maxHeight * Math.random());
-  var borderSize = 15;
-  var animalSize = 50;
 
-  if (randomX < borderSize) {
-    randomX = borderSize;
-  } else if (randomX > maxWidth - borderSize - animalSize) {
-    randomX = maxWidth - borderSize - animalSize;
+  if (randomX > maxWidth - animalSize) {
+    randomX = maxWidth - animalSize;
   }
 
-  if (randomY < borderSize) {
-    randomY = borderSize;
-  } else if (randomY > maxHeight - borderSize - animalSize) {
-    randomY = maxHeight - borderSize - animalSize;
+  if (randomY > maxHeight - animalSize) {
+    randomY = maxHeight - animalSize;
   }
 
   return {

@@ -5,7 +5,7 @@ function Animal() {
   this.vy = Math.random() * 2;
   this.scale = 0;
   this.texture = '';
-  this.textureSize = 40;
+  this.textureSize = animalSize;
   this.isStop = false;
   this.isShow = false;
 }
@@ -30,10 +30,10 @@ Animal.prototype.move = function() {
     return;
   }
 
-  if (this.y > height - 60 || this.y < 15) {
+  if (this.y > height - this.textureSize || this.y < 0) {
     this.vy *= -1;
   }
-  if (this.x > width - 60 || this.x < 15) {
+  if (this.x > width - this.textureSize || this.x < 0) {
     this.vx *= -1;
   }
 

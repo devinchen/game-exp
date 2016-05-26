@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #326E2B;
+}
+.container {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+#farm {
+  background-color: #8BC34A;
+  max-width: 80vw;
+  margin: auto;
+}
