@@ -6,8 +6,8 @@ var sourceFiles = [
   'src/farm.js',
   'src/animal.js',
   'src/textures.js',
-  'src/touch-events.js',
   'src/device-events.js',
+  'src/touch-events.js',
   'src/helpers.js',
   'src/index.js'
 ];
