@@ -15,7 +15,7 @@ Animal.prototype.show = function() {
     return;
   }
 
-  if (this.scale < 1) {
+  if (this.scale <= 1) {
     this.scale += 0.1;
   } else {
     this.isShow = true;
@@ -23,17 +23,16 @@ Animal.prototype.show = function() {
 };
 
 Animal.prototype.move = function() {
-  var width = context.canvas.width;
-  var height = context.canvas.height;
+  var canvasSize = farm.getSize();
 
   if (this.isStop) {
     return;
   }
 
-  if (this.y > height - this.textureSize || this.y < 0) {
+  if (this.y > canvasSize.height - this.textureSize || this.y < 0) {
     this.vy *= -1;
   }
-  if (this.x > width - this.textureSize || this.x < 0) {
+  if (this.x > canvasSize.width - this.textureSize || this.x < 0) {
     this.vx *= -1;
   }
 
@@ -53,6 +52,17 @@ Animal.prototype.setTexture = function(texture) {
   var image = new Image();
   image.src = texture;
   this.texture = image;
+};
+
+Animal.prototype.setPositionByRatio = function(ratio) {
+  if (ratio) {
+    this.x *= ratio;
+    this.y *= ratio;
+  }
+};
+
+Animal.prototype.setSize = function (size) {
+  this.textureSize = size;
 };
 
 Animal.prototype.draw = function(context) {

@@ -1,20 +1,17 @@
-var canvas = document.getElementById('farm');
-var context = canvas.getContext('2d');
+var farm = new Farm(document.getElementById('farm'));
+var farmDOM = farm.canvas;
+var farmContext = farm.context;
 var maxAnimals = 12;
 var countDownFrom = 12;
 var timer = Timer.getInstance();
 var textures = getTextures();
 var animals = [];
-var animalSize = 40;
+var animalSize = calcAnimalSize(farm);
 var index = 0;
 var observer;
 
-function isCheckPoint() {
-  return timer.time % (countDownFrom / maxAnimals) === 0;
-}
-
 function generateAnimal(textureIndex) {
-  var randomPosition = getRandomPosition(context);
+  var randomPosition = getRandomPosition(farm);
   var animal = new Animal();
 
   animal.setTexture(textures[textureIndex]);
@@ -38,18 +35,19 @@ observer = setInterval(function() {
 timer.time = countDownFrom;
 timer.start();
 
-canvas.addEventListener('touchstart', onTouchStart);
-canvas.addEventListener('touchend', onTouchEnd);
+farmDOM.addEventListener('touchstart', onTouchStart);
+farmDOM.addEventListener('touchend', onTouchEnd);
+screen.orientation.addEventListener('change', onRotate);
 
 (function play() {
-  window.requestAnimationFrame(play, canvas);
-  context.clearRect(0, 0, canvas.width, canvas.height);
+  window.requestAnimationFrame(play, farmDOM);
+  farm.context.clearRect(0, 0, farmDOM.width, farmDOM.height);
 
   animals.forEach(function(animal, index) {
     animal.show();
     animal.move();
-    animal.draw(context);
+    animal.draw(farmContext);
   });
 
-  timer.draw(context);
+  timer.draw(farmContext);
 })();

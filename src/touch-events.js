@@ -19,7 +19,7 @@ function onTouchStart(event) {
     targetAnimalIndex = onHitAnimalIndex.pop();
     offsetPosition.x = touchLeft - animals[targetAnimalIndex].x;
     offsetPosition.y = touchTop - animals[targetAnimalIndex].y;
-    canvas.addEventListener('touchmove', onTouchMove);
+    farmDOM.addEventListener('touchmove', onTouchMove);
   }
 }
 
@@ -62,5 +62,5 @@ function onTouchEnd(event) {
 
   targetAnimal && targetAnimal.resume();
   targetAnimalIndex = -1;
-  canvas.removeEventListener('touchmove', onTouchMove);
+  farmDOM.removeEventListener('touchmove', onTouchMove);
 }
