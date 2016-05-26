@@ -6,10 +6,11 @@ body {
 .container {
   display: flex;
   align-items: center;
-  height: 100vh;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
 }
 #farm {
   background-color: #8BC34A;
-  max-width: 80vw;
   margin: auto;
 }

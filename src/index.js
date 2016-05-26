@@ -1,5 +1,6 @@
-var canvas = document.getElementById('farm');
-var context = canvas.getContext('2d');
+var farm = new Farm(document.getElementById('farm'));
+var farmDOM = farm.canvas;
+var farmContext = farm.context;
 var maxAnimals = 12;
 var countDownFrom = 12;
 var timer = Timer.getInstance();
@@ -14,7 +15,7 @@ function isCheckPoint() {
 }
 
 function generateAnimal(textureIndex) {
-  var randomPosition = getRandomPosition(context);
+  var randomPosition = getRandomPosition(farm.context);
   var animal = new Animal();
 
   animal.setTexture(textures[textureIndex]);
@@ -38,18 +39,18 @@ observer = setInterval(function() {
 timer.time = countDownFrom;
 timer.start();
 
-canvas.addEventListener('touchstart', onTouchStart);
-canvas.addEventListener('touchend', onTouchEnd);
+farmDOM.addEventListener('touchstart', onTouchStart);
+farmDOM.addEventListener('touchend', onTouchEnd);
 
 (function play() {
-  window.requestAnimationFrame(play, canvas);
-  context.clearRect(0, 0, canvas.width, canvas.height);
+  window.requestAnimationFrame(play, farmDOM);
+  farm.context.clearRect(0, 0, farmDOM.width, farmDOM.height);
 
   animals.forEach(function(animal, index) {
     animal.show();
     animal.move();
-    animal.draw(context);
+    animal.draw(farmContext);
   });
 
-  timer.draw(context);
+  timer.draw(farmContext);
 })();

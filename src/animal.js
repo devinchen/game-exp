@@ -23,17 +23,16 @@ Animal.prototype.show = function() {
 };
 
 Animal.prototype.move = function() {
-  var width = context.canvas.width;
-  var height = context.canvas.height;
+  var canvasSize = farm.getSize();
 
   if (this.isStop) {
     return;
   }
 
-  if (this.y > height - this.textureSize || this.y < 0) {
+  if (this.y > canvasSize.height - this.textureSize || this.y < 0) {
     this.vy *= -1;
   }
-  if (this.x > width - this.textureSize || this.x < 0) {
+  if (this.x > canvasSize.width - this.textureSize || this.x < 0) {
     this.vx *= -1;
   }
 

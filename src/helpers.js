@@ -17,3 +17,10 @@ function getRandomPosition(context) {
     y: randomY,
   };
 }
+
+function getScreenSize() {
+  return {
+    width: screen.width || window.innerWidth,
+    height: screen.height || window.innerHeight
+  };
+}
