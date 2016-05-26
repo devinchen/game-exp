@@ -41,6 +41,7 @@ timer.start();
 
 farmDOM.addEventListener('touchstart', onTouchStart);
 farmDOM.addEventListener('touchend', onTouchEnd);
+screen.orientation.addEventListener('change', onRotate);
 
 (function play() {
   window.requestAnimationFrame(play, farmDOM);
